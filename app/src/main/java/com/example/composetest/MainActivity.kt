@@ -58,13 +58,17 @@ class MainActivity : ComponentActivity() {
             val description = "Dinos in the park"
             val title = "Dinos playing in the park"
 
-            Column(verticalArrangement = Arrangement.SpaceBetween) {
+            val color = remember {
+                mutableStateOf (Color.Yellow)
+            }
+
+            Column(Modifier.fillMaxSize()) {
 
                 Box(modifier = Modifier
-                    .padding(10.dp)
-                    .fillMaxWidth(0.9f)
-                    .fillMaxHeight(0.5f)
-                    .background(Color(0xFF101010))
+                    .weight(1f)
+                    .fillMaxSize()
+                    .background(color.value)
+//                    .background(Color(0xFF101010))
                 ) {
                     Text(
                         text = buildAnnotatedString {
@@ -96,24 +100,27 @@ class MainActivity : ComponentActivity() {
                         textDecoration = TextDecoration.Underline
 
                     )
-                    Box(modifier = Modifier
-                        .fillMaxWidth(0.5f)
-                        .fillMaxHeight(0.5f)
-                        .padding(top = 50.dp)
-                        .padding(10.dp))
-                    {
-                        ImageCard(
-                            painter = painter,
-                            contentDescription = description,
-                            title = title)
-                    }
+
+
 
                 }
 
+                Box(modifier = Modifier
+                    .weight(1f).fillMaxSize())
+                {
+                    ImageCard(
+                        painter = painter,
+                        contentDescription = description,
+                        title = title)
+                }
 
+                ColorBox(Modifier
+                    .fillMaxSize()
+                    .weight(1f)) {
+                        color.value = it
+                }
 
             }
-
 
             
 
@@ -149,21 +156,22 @@ class MainActivity : ComponentActivity() {
 
 
     @Composable
-    fun ColorBox(modifier: Modifier = Modifier) {
-        val color = remember {
-            mutableStateOf (Color.Yellow)
-        }
+    fun ColorBox(modifier: Modifier = Modifier,
+    updateColor: (Color) -> Unit) {
 
-        Box(modifier = Modifier
-            .background(color.value)
+        Box(modifier = modifier
+            .background(Color.Red)
             .clickable {
-                color.value = Color(
-                    Random.nextFloat(),
-                    Random.nextFloat(),
-                    Random.nextFloat(),
-                    1F
-                )
-            })
+                updateColor (
+                     Color(
+                        Random.nextFloat(),
+                        Random.nextFloat(),
+                        Random.nextFloat(),
+                         1F
+                                  )
+                        )
+            }
+            .offset(100.dp, 100.dp))
     }
 
 
