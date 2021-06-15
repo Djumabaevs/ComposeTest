@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -19,6 +20,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -26,11 +28,14 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.composetest.ui.theme.ComposeTestTheme
 import java.time.format.TextStyle
+import kotlin.random.Random
+import androidx.compose.runtime.mutableStateOf as mutableStateOf
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,37 +58,65 @@ class MainActivity : ComponentActivity() {
             val description = "Dinos in the park"
             val title = "Dinos playing in the park"
 
-            Box(modifier = Modifier
-                .padding(10.dp)
-                .height(30.dp)
-                .width(30.dp)
-                .background(Color(0xFF101010))
-            ) {
-                Text(
-                    text = buildAnnotatedString {
+            Column(verticalArrangement = Arrangement.SpaceBetween) {
 
-                    },
-                    color = Color.White,
-                    fontSize = 20.sp,
-                    fontFamily = fontFamily,
-                    fontWeight = FontWeight.Bold,
-                    fontStyle = FontStyle.Italic,
-                    textAlign = TextAlign.Center,
-                    textDecoration = TextDecoration.Underline
+                Box(modifier = Modifier
+                    .padding(10.dp)
+                    .fillMaxWidth(0.9f)
+                    .fillMaxHeight(0.5f)
+                    .background(Color(0xFF101010))
+                ) {
+                    Text(
+                        text = buildAnnotatedString {
+                            withStyle(
+                                style = SpanStyle(
+                                    color = Color.Green,
+                                    fontSize = 50.sp
+                                )
+                            ) {
+                                append("J")
+                            }
+                            append("etPack ")
+                            withStyle(
+                                style = SpanStyle(
+                                    color = Color.Green,
+                                    fontSize = 50.sp
+                                )
+                            ) {
+                                append("C")
+                            }
+                            append("ompose")
+                        },
+                        color = Color.White,
+                        fontSize = 20.sp,
+                        fontFamily = fontFamily,
+                        fontWeight = FontWeight.Bold,
+                        fontStyle = FontStyle.Italic,
+                        textAlign = TextAlign.Center,
+                        textDecoration = TextDecoration.Underline
 
-                )
+                    )
+                    Box(modifier = Modifier
+                        .fillMaxWidth(0.5f)
+                        .fillMaxHeight(0.5f)
+                        .padding(top = 50.dp)
+                        .padding(10.dp))
+                    {
+                        ImageCard(
+                            painter = painter,
+                            contentDescription = description,
+                            title = title)
+                    }
+
+                }
+
+
+
             }
+
 
             
-            Box(modifier = Modifier
-                .fillMaxWidth(0.5f)
-                .padding(16.dp))
-            {
-                ImageCard(
-                    painter = painter,
-                    contentDescription = description,
-                    title = title)
-            }
+
 
 
 
@@ -112,6 +145,25 @@ class MainActivity : ComponentActivity() {
                         .padding(15.dp))
                 }*/
         }
+    }
+
+
+    @Composable
+    fun ColorBox(modifier: Modifier = Modifier) {
+        val color = remember {
+            mutableStateOf (Color.Yellow)
+        }
+
+        Box(modifier = Modifier
+            .background(color.value)
+            .clickable {
+                color.value = Color(
+                    Random.nextFloat(),
+                    Random.nextFloat(),
+                    Random.nextFloat(),
+                    1F
+                )
+            })
     }
 
 
