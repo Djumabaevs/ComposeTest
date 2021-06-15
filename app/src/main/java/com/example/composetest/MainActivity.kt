@@ -3,6 +3,7 @@ package com.example.composetest
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -15,9 +16,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.composetest.ui.theme.ComposeTestTheme
+import java.time.format.TextStyle
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +66,27 @@ class MainActivity : ComponentActivity() {
             shape = RoundedCornerShape(15.dp),
             elevation = 5.dp
         ) {
-
+            Box(modifier = Modifier.height(200.dp))
+            {
+                Image(
+                    painter = painter,
+                    contentDescription = contentDescription,
+                    contentScale = ContentScale.Crop)
+                
+                Text(text = "Dinos i the park!",
+                     modifier = Modifier
+                         .align(Alignment.BottomStart)
+                         .padding(12.dp),
+                     fontSize = 16.sp)
+                
+/*                Box(modifier = Modifier
+                    .fillMaxSize()
+                    .padding(12.dp),
+                     contentAlignment = Alignment.BottomStart)
+                {
+                    Text(title, style = TextStyle(color = Color.White, fontSize = 16.sp))
+                }*/
+            }
         }
     }
 
