@@ -13,10 +13,12 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -27,7 +29,26 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-                Column(modifier = Modifier
+
+
+            val painter = painterResource(id = R.drawable.dino)
+            val description = "Dinos in the park"
+            val title = "Dinos playing in the park"
+
+            Box(modifier = Modifier
+                .fillMaxWidth(0.5f)
+                .padding(16.dp))
+            {
+                ImageCard(
+                    painter = painter,
+                    contentDescription = description,
+                    title = title)
+            }
+
+
+
+
+          /*      Column(modifier = Modifier
                     .background(Color.Cyan)
                     .fillMaxHeight(0.5f)
                     .width(500.dp)
@@ -49,7 +70,7 @@ class MainActivity : ComponentActivity() {
                         .padding(10.dp)
                         .border(20.dp, Color.Blue)
                         .padding(15.dp))
-                }
+                }*/
         }
     }
 
@@ -72,8 +93,20 @@ class MainActivity : ComponentActivity() {
                     painter = painter,
                     contentDescription = contentDescription,
                     contentScale = ContentScale.Crop)
-                
-                Text(text = "Dinos i the park!",
+
+                Box(modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        Brush.verticalGradient(
+                            colors = listOf(
+                                Color.Transparent,
+                                Color.Black
+                            ),
+                            startY = 300f
+                        )
+                    ))
+
+                Text(text = "Dinos in the park!",
                      modifier = Modifier
                          .align(Alignment.BottomStart)
                          .padding(12.dp),
