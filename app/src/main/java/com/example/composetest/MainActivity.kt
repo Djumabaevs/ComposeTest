@@ -11,7 +11,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -55,6 +55,13 @@ class MainActivity : ComponentActivity() {
 
             
             val scaffoldState = rememberScaffoldState()
+//            val textFieldState = remember {
+//                mutableStateOf("")
+//            }
+            //syntax sugar
+            var textFieldState by remember {
+                mutableStateOf("")
+            }
 
 
             val painter = painterResource(id = R.drawable.dino)
@@ -76,10 +83,14 @@ class MainActivity : ComponentActivity() {
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center,
-                        modifier = Modifier.fillMaxSize().padding(horizontal = 30.dp)
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(horizontal = 30.dp)
                     ) {
 
-
+                        TextField(
+                            value =
+                        )
                     }
                 }
 
