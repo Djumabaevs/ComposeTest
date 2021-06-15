@@ -3,11 +3,9 @@ package com.example.composetest
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -74,13 +72,20 @@ class MainActivity : ComponentActivity() {
             val color = remember {
                 mutableStateOf (Color.Yellow)
             }
+            val scrollState = rememberScrollState()
+            
 
-            Column(Modifier.fillMaxSize()) {
+            
 
-                Scaffold(modifier = Modifier
-                    .weight(1f)
-                    .fillMaxSize(),
-                scaffoldState = scaffoldState)
+            Column(Modifier
+                .fillMaxSize()) {
+
+                Scaffold(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxSize(),
+                    scaffoldState = scaffoldState
+                )
                 {
 
                     Column(
@@ -102,7 +107,7 @@ class MainActivity : ComponentActivity() {
                             singleLine = true,
                             modifier = Modifier.fillMaxWidth()
                         )
-                        
+
                         Spacer(modifier = Modifier.height(16.dp))
 
                         Button(onClick = {
@@ -116,10 +121,11 @@ class MainActivity : ComponentActivity() {
                     }
                 }
 
-                Box(modifier = Modifier
-                    .weight(1f)
-                    .fillMaxSize()
-                    .background(color.value)
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxSize()
+                        .background(color.value)
 //                    .background(Color(0xFF101010))
                 ) {
                     Text(
@@ -154,25 +160,74 @@ class MainActivity : ComponentActivity() {
                     )
 
 
-
                 }
 
-                Box(modifier = Modifier
-                    .weight(1f)
-                    .fillMaxSize())
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxSize()
+                )
                 {
                     ImageCard(
                         painter = painter,
                         contentDescription = description,
-                        title = title)
+                        title = title
+                    )
                 }
 
                 ColorBox(
                     Modifier
                         .fillMaxSize()
-                        .weight(1f)) {
-                        color.value = it
+                        .weight(1f)
+                ) {
+                    color.value = it
                 }
+
+            /* LazyColumn {
+            
+            // itemsIndexed(
+            listOf("This is", "Compose", "yes") {
+            index, string ->
+            Text(
+                         text = string,
+                         fontSize = 24.sp,
+                         fontWeight = FontWeight.Bold,
+                         textAlign = TextAlign.Center,
+                         modifier = Modifier
+                             .fillMaxSize()
+                     )
+            } //
+            
+                 items(5000) {
+                     Text(
+                         text = "Item $it",
+                         fontSize = 24.sp,
+                         fontWeight = FontWeight.Bold,
+                         textAlign = TextAlign.Center,
+                         modifier = Modifier
+                             .fillMaxSize()
+                     )
+                 }
+             }*/
+
+
+                Column(
+                    Modifier
+                        .weight(1f)
+                        .fillMaxSize()
+                        .verticalScroll(scrollState)) {
+                    for (i in 1..50) {
+                        Text(
+                            text = "Item $i",
+                            fontSize = 24.sp,
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier
+                                .fillMaxSize()
+                        )
+                    }
+                }
+
 
             }
 
