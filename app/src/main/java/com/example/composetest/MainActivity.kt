@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
@@ -35,9 +36,16 @@ class MainActivity : ComponentActivity() {
                     verticalArrangement = Arrangement.SpaceAround
                    ) {
                     Text("Bakyt is", modifier = Modifier
-                        .offset(50.dp, 20.dp))
+                        .offset(50.dp, 20.dp)
+                        .clickable {
+
+                        })
                     Spacer(modifier = Modifier.height(200.dp))
-                    Text("Developer")
+                    Text("Developer", modifier = Modifier
+                        .border(15.dp, Color.Black)
+                        .padding(10.dp)
+                        .border(20.dp, Color.Blue)
+                        .padding(15.dp))
                 }
         }
     }
