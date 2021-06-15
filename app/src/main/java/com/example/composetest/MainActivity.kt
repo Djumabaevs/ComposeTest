@@ -53,6 +53,9 @@ class MainActivity : ComponentActivity() {
 
         setContent {
 
+            
+            val scaffoldState = rememberScaffoldState()
+
 
             val painter = painterResource(id = R.drawable.dino)
             val description = "Dinos in the park"
@@ -63,6 +66,22 @@ class MainActivity : ComponentActivity() {
             }
 
             Column(Modifier.fillMaxSize()) {
+
+                Scaffold(modifier = Modifier
+                    .weight(1f)
+                    .fillMaxSize(),
+                scaffoldState = scaffoldState)
+                {
+
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center,
+                        modifier = Modifier.fillMaxSize().padding(horizontal = 30.dp)
+                    ) {
+
+
+                    }
+                }
 
                 Box(modifier = Modifier
                     .weight(1f)
@@ -106,7 +125,8 @@ class MainActivity : ComponentActivity() {
                 }
 
                 Box(modifier = Modifier
-                    .weight(1f).fillMaxSize())
+                    .weight(1f)
+                    .fillMaxSize())
                 {
                     ImageCard(
                         painter = painter,
@@ -114,9 +134,10 @@ class MainActivity : ComponentActivity() {
                         title = title)
                 }
 
-                ColorBox(Modifier
-                    .fillMaxSize()
-                    .weight(1f)) {
+                ColorBox(
+                    Modifier
+                        .fillMaxSize()
+                        .weight(1f)) {
                         color.value = it
                 }
 
@@ -162,14 +183,14 @@ class MainActivity : ComponentActivity() {
         Box(modifier = modifier
             .background(Color.Red)
             .clickable {
-                updateColor (
-                     Color(
+                updateColor(
+                    Color(
                         Random.nextFloat(),
                         Random.nextFloat(),
                         Random.nextFloat(),
-                         1F
-                                  )
-                        )
+                        1F
+                    )
+                )
             }
             .offset(100.dp, 100.dp))
     }
