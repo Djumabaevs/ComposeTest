@@ -19,6 +19,9 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -28,6 +31,17 @@ import java.time.format.TextStyle
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val fontFamily = FontFamily(
+            Font(R.font.lexend_thin, FontWeight.Thin),
+            Font(R.font.lexend_light, FontWeight.Light),
+            Font(R.font.lexend_regular, FontWeight.Normal),
+            Font(R.font.lexend_medium, FontWeight.Medium),
+            Font(R.font.lexend_semibold, FontWeight.SemiBold),
+            Font(R.font.lexend_bold, FontWeight.Bold),
+            Font(R.font.lexend_extrabold, FontWeight.ExtraBold),
+        )
+
         setContent {
 
 
@@ -100,7 +114,7 @@ class MainActivity : ComponentActivity() {
                         Brush.verticalGradient(
                             colors = listOf(
                                 Color.Transparent,
-                                Color.Black
+                                Color.Green
                             ),
                             startY = 300f
                         )
@@ -110,7 +124,8 @@ class MainActivity : ComponentActivity() {
                      modifier = Modifier
                          .align(Alignment.BottomStart)
                          .padding(12.dp),
-                     fontSize = 16.sp)
+                     fontSize = 16.sp,
+                     color = Color.White)
                 
 /*                Box(modifier = Modifier
                     .fillMaxSize()
