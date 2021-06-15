@@ -19,9 +19,13 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -49,6 +53,28 @@ class MainActivity : ComponentActivity() {
             val description = "Dinos in the park"
             val title = "Dinos playing in the park"
 
+            Box(modifier = Modifier
+                .padding(10.dp)
+                .height(30.dp)
+                .width(30.dp)
+                .background(Color(0xFF101010))
+            ) {
+                Text(
+                    text = buildAnnotatedString {
+
+                    },
+                    color = Color.White,
+                    fontSize = 20.sp,
+                    fontFamily = fontFamily,
+                    fontWeight = FontWeight.Bold,
+                    fontStyle = FontStyle.Italic,
+                    textAlign = TextAlign.Center,
+                    textDecoration = TextDecoration.Underline
+
+                )
+            }
+
+            
             Box(modifier = Modifier
                 .fillMaxWidth(0.5f)
                 .padding(16.dp))
@@ -125,7 +151,8 @@ class MainActivity : ComponentActivity() {
                          .align(Alignment.BottomStart)
                          .padding(12.dp),
                      fontSize = 16.sp,
-                     color = Color.White)
+                     color = Color.White
+                    )
                 
 /*                Box(modifier = Modifier
                     .fillMaxSize()
