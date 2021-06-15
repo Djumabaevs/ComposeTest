@@ -33,6 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.composetest.ui.theme.ComposeTestTheme
+import kotlinx.coroutines.launch
 import java.time.format.TextStyle
 import kotlin.random.Random
 import androidx.compose.runtime.mutableStateOf as mutableStateOf
@@ -63,6 +64,8 @@ class MainActivity : ComponentActivity() {
                 mutableStateOf("")
             }
 
+            val scope = rememberCoroutineScope()
+
 
             val painter = painterResource(id = R.drawable.dino)
             val description = "Dinos in the park"
@@ -89,8 +92,27 @@ class MainActivity : ComponentActivity() {
                     ) {
 
                         TextField(
-                            value =
+                            value = textFieldState,
+                            label = {
+                                Text(text = "Enter your name")
+                            },
+                            onValueChange = {
+                                textFieldState = it
+                            },
+                            singleLine = true,
+                            modifier = Modifier.fillMaxWidth()
                         )
+                        
+                        Spacer(modifier = Modifier.height(16.dp))
+
+                        Button(onClick = {
+                            scope.launch {
+                                scaffoldState.snackbarHostState.showSnackbar("Hello $textFieldState")
+                            }
+
+                        }) {
+                            Text("Please greet me!")
+                        }
                     }
                 }
 
