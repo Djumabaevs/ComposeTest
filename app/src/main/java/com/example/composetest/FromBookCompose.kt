@@ -5,6 +5,8 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -26,8 +28,10 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -424,6 +428,25 @@ data class BookCategory(@StringRes val categoryResourceId: Int, val bookImageRes
 
 
 
+
+@Composable
+fun ListItem(bookCategory: BookCategory, modifier: Modifier = Modifier) {
+    Column(modifier = Modifier.padding(8.dp)) {
+        Text(
+            text = stringResource(bookCategory.categoryResourceId),
+            fontSize = 22.sp,
+            fontWeight = FontWeight.Bold,
+            color = colorResource(id = R.color.colorPrimary)
+        )
+        Spacer(modifier = modifier.height(8.dp))
+
+        LazyRow {
+            items(bookCategory.bookImageResources) { items ->
+                BookImage(items)
+            }
+        }
+    }
+}
 
 
 
