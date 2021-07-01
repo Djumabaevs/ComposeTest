@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -407,6 +408,19 @@ fun BookImage(@DrawableRes imageResId: Int, @StringRes contentDescriptionResId: 
         modifier = Modifier.size(476.dp, 616.dp)
     )
 }
+
+
+@Composable
+fun BookImage(imageResource: Int) {
+    Image(
+        modifier = Modifier.size(170.dp, 200.dp),
+        painter = painterResource(id = imageResource),
+        contentScale = ContentScale.Fit,
+        contentDescription = stringResource(R.string.book_image)
+    )
+}
+
+data class BookCategory(@StringRes val categoryResourceId: Int, val bookImageResources: List<Int>)
 
 
 
