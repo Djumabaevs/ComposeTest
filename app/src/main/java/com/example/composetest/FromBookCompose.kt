@@ -5,6 +5,7 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -448,6 +449,22 @@ fun ListItem(bookCategory: BookCategory, modifier: Modifier = Modifier) {
     }
 }
 
+
+@Composable
+fun ListScreen() {
+    MyList()
+
+    BackButtonHandler {
+        JetFundamentalsRouter.navigateTo(Screen.Navigation)
+    }
+}
+
+@Composable
+fun MyList() {
+    LazyColumn {
+        items(items) { item -> ListItem(item)}
+    }
+}
 
 
 
