@@ -10,6 +10,7 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -17,6 +18,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.CoroutineScope
 
 @Composable
 fun AlertDialogScreen() {
@@ -315,6 +317,26 @@ fun MyAlertDialog() {
         )
     }
 }
+
+
+
+
+@Composable
+fun MyScaffold() {
+    val scaffoldState: ScaffoldState = rememberScaffoldState()
+    val scope: CoroutineScope = rememberCoroutineScope()
+
+    Scaffold(
+        scaffoldState = scaffoldState,
+        contentColor = colorResource(id = R.color.colorPrimary),
+        content = { MyRow() },
+        topBar = { MyTopAppBar(scaffoldState = scaffoldState, scope = scope) },
+        bottomBar = { MyBottomAppBar()},
+        drawerContent = { MyColumn()}
+    )
+}
+
+
 
 
 
