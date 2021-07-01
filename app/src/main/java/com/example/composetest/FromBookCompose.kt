@@ -2,8 +2,10 @@ package com.example.composetest
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -372,6 +374,23 @@ fun MyBottomAppBar() {
     BottomAppBar(content = {},
         backgroundColor = colorResource(R.color.colorPrimary))
 }
+
+
+
+@Composable
+fun MyScrollingScreen(modifier: Modifier = Modifier) {
+    Column( modifier =
+    modifier.verticalScroll(rememberScrollState())) {
+        BookImage(R.drawable.advanced_architecture_android,
+            R.string.advanced_architecture_android)
+        BookImage(R.drawable.kotlin_aprentice,
+            R.string.kotlin_apprentice)
+        BookImage(R.drawable.kotlin_coroutines,
+            R.string.kotlin_coroutines)
+    }
+
+}
+
 
 
 
