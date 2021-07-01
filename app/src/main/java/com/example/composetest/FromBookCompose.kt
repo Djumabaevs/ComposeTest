@@ -250,3 +250,34 @@ fun MyTextField() {
 
 
 
+@Composable
+fun SurfaceScreen(modifier: Modifier = Modifier) {
+
+    Box(modifier = modifier.fillMaxSize()) {
+        MySurface(modifier = modifier.align(Alignment.Center))
+    }
+
+    BackButtonHandler {
+        JetFundamentalsRouter.navigateTo(Screen.Navigation)
+    }
+}
+
+@Composable
+fun MySurface(modifier: Modifier) {
+    Surface(
+        modifier = modifier.size(100.dp),
+        color = Color.LightGray,
+        contentColor = colorResource(id = com.raywenderlich.android.jetpackcompose.R.color.colorPrimary),
+        elevation = 1.dp,
+        border = BorderStroke(1.dp, Color.Black)
+    ) {
+        MyColumn()
+
+    }
+}
+
+
+
+
+
+
